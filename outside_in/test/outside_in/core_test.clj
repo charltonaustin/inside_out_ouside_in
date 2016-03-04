@@ -3,5 +3,5 @@
             [outside-in.core :refer :all]))
 
 (deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+  (let [application-output (with-out-str (-main))]
+    (is (= application-output "Hello, World!\n"))))
