@@ -3,14 +3,11 @@
             [outside-in.core :refer :all])
   (:import (java.io ByteArrayInputStream InputStreamReader BufferedReader)))
 
-;ByteArrayInputStream in = new ByteArrayInputStream("My string".getBytes());
-;System.setIn(in);
 
-(defn write-to-stdin []
-  (let [input-stream (new ByteArrayInputStream (.getBytes "Charlie"))]
-    (System/setIn input-stream)))
+(defn create-out-put [message]
+  (new BufferedReader (new InputStreamReader (new ByteArrayInputStream (.getBytes message)) "UTF-8")))
 
-(deftest a-test
-  (binding [*in* (new BufferedReader (new InputStreamReader (new ByteArrayInputStream (.getBytes "Charlie!")) "UTF-8"))]
+(deftest function-test
+  (binding [*in* (create-out-put "Charlie!")]
     (let [application-output (with-out-str (-main))]
       (is (= application-output "Hello, Charlie!\n")))))

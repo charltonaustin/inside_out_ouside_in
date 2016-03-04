@@ -1,32 +1,27 @@
 # inside_out
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+A tic-tac-toe application to show inside out software design using Clojure.
 
 ## Usage
 
-FIXME: explanation
 
-    $ java -jar inside_out-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
 
 ## Examples
+
+## TODO
+
+1.  Print board to output
+1.  Have player select location
+1.  Have computer select a location
+1.  Have player be able to select difficulty of AI (easy, medium, hard)
+1.  Have AI on medium occasionally a random move
+1.  Have AI on hard not be beatable
 
 ...
 
 ### Bugs
 
 ...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
