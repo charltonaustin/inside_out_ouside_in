@@ -10,8 +10,8 @@ A tic-tac-toe application to show inside out software design using Clojure.
 
 ## TODO
 
-1.  Print board to screen
-1.  Have player select location
+1.  ~~Print board to screen~~
+1.  Have player select location  
 1.  Have computer select a location
 1.  Have player be able to select difficulty of AI (easy, medium, hard)
 1.  Have AI on medium occasionally a random move
