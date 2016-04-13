@@ -14,9 +14,10 @@
       a-board)))
 
 (defn board []
-  (repeat 9 "*"))
+  (vec (repeat 9 "*")))
 
-
+(defn update-board [a-board position value]
+  (assoc a-board position value))
 
 (defn -main
   "I don't do a whole lot ... yet."
