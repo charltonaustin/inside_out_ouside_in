@@ -20,7 +20,7 @@
   (vec (map str (range 1 10))))
 
 (defn update-board [a-board position value]
-  (assoc a-board position value))
+  (assoc a-board (- position 1) value))
 
 (defn ask-player-where-to-play []
   (loop []
@@ -34,11 +34,14 @@
   (clear-screen)
   (print str-rep))
 
+(defn computer-select-location [a-board]
+  (let [position (rand-nth (range 1 10))]
+    (update-board a-board position "O")))
+
 (defn exit-now! []
   (System/exit 0))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
   (loop [a-board (board)
          number-of-moves 0]
@@ -47,6 +50,6 @@
       (do
         (print-to-screen (str-board a-board))
         (let [user-input (ask-player-where-to-play)]
-          (recur (update-board a-board user-input "X") (+ number-of-moves 2)))))))
+          (recur (computer-select-location (update-board a-board user-input "X")) (+ number-of-moves 2)))))))
 
 

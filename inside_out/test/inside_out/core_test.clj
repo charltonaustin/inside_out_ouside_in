@@ -15,10 +15,11 @@
 
 (deftest update-board-test
   (testing "Update the board with a new value"
-    (is (= ["*" "X"] (update-board ["*" "*"] 1 "X")))))
+    (is (= ["X" "*"] (update-board ["*" "*"] 1 "X")))))
 
 (deftest ask-player-where-to-play-test
   (testing "check that all values work"
+    ; this should be parameterized
     (is (= 1 (with-in-str (str 1 "\n") (ask-player-where-to-play))))
     (is (= 2 (with-in-str (str 2 "\n") (ask-player-where-to-play))))
     (is (= 3 (with-in-str (str 3 "\n") (ask-player-where-to-play))))
@@ -31,6 +32,10 @@
   (testing "Get a number between 1-9"
     (is (= "Please pick a number between 1 and 9.\nPlease pick a number between 1 and 9.\n"
            (with-out-str (with-in-str "b\n1\n" (ask-player-where-to-play)))))))
+
+(deftest computer-select-location-test
+  (testing ""
+    (testing (is (true? (boolean (some #(= "O" %1) (computer-select-location test-board))))))))
 
 (deftest main-test
   (testing "Print out blank board"
