@@ -1,9 +1,7 @@
 # outside_in
 
-A tic-tac-toe application to show outside in software design using Clojure.
-
-## Usage
-
+A very simple tic-tac-toe application to show outside in software design
+ using Clojure.
 
 
 ## Examples
@@ -13,15 +11,6 @@ A tic-tac-toe application to show outside in software design using Clojure.
 1.  Print board to output
 1.  Have player select location
 1.  Have computer select a location
-1.  Have player be able to select difficulty of AI (easy, medium, hard)
-1.  Have AI on medium occasionally a random move
-1.  Have AI on hard not be beatable
-
-...
-
-### Bugs
-
-...
 
 ## License
 

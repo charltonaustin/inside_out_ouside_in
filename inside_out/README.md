@@ -1,8 +1,7 @@
 # inside_out
 
-A tic-tac-toe application to show inside out software design using Clojure.
-
-## Usage
+A very simple tic-tac-toe application to show inside out software design
+ using Clojure. 
 
 
 
@@ -14,11 +13,6 @@ A tic-tac-toe application to show inside out software design using Clojure.
 1.  ~~Have player select location~~  
 1.  ~~Have computer select a location~~
 
-...
-
-### Bugs
-
-...
 
 ## License
 
