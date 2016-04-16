@@ -17,27 +17,36 @@
       a-board)))
 
 (defn board []
-  (vec (repeat 9 "*")))
+  (vec (map str (range 1 10))))
 
 (defn update-board [a-board position value]
   (assoc a-board position value))
 
 (defn ask-player-where-to-play []
   (loop []
+    (println "Please pick a number between 1 and 9.")
     (let [user-input (read-string (read-line))]
-      (if (contains? (set (range 1 9)) user-input)
+      (if (contains? (set (range 1 10)) user-input)
         user-input
-        (do
-          (println "Please pick a number between 1 and 9.")
-          (recur))))))
+        (recur)))))
 
 (defn print-to-screen [str-rep]
   (clear-screen)
   (print str-rep))
 
+(defn exit-now! []
+  (System/exit 0))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (print-to-screen (str-board (board))))
+  (loop [a-board (board)
+         number-of-moves 0]
+    (if (> number-of-moves 9)
+      (exit-now!)
+      (do
+        (print-to-screen (str-board a-board))
+        (let [user-input (ask-player-where-to-play)]
+          (recur (update-board a-board user-input "X") (+ number-of-moves 2)))))))
 
 
