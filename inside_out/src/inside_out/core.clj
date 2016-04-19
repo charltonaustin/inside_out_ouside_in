@@ -44,23 +44,22 @@
 (def turn-function
   (take 9 (cycle [ask-player-where-to-play computer-select-location])))
 
-(defn check-horizontal-winner [a-board char]
-  (loop [a-board a-board
-         row 0]
-    (if (> row 6)
-      nil
-      (if (every? #(= char %1) [(get a-board row) (get a-board (+ row 1)) (get a-board (+ row 2))])
-        char
-        (recur a-board (+ row 3))))))
-
-(defn check-vertical-winner [a-board char]
+(defn check-non-diagnol-winners [a-board char stop increment step]
   (loop [a-board a-board
          column 0]
-    (if (> column 3)
+    (if (> column stop)
       nil
-      (if (every? #(= char %1) [(get a-board column) (get a-board (+ column 3)) (get a-board (+ column 6))])
+      (if (every? #(= char %1) [(get a-board column)
+                                (get a-board (+ column increment))
+                                (get a-board (+ column (* 2 increment)))])
         char
-        (recur a-board (+ column 1))))))
+        (recur a-board (+ column step))))))
+
+(defn check-horizontal-winner [a-board char]
+  (check-non-diagnol-winners a-board char 6 1 3))
+
+(defn check-vertical-winner [a-board char]
+  (check-non-diagnol-winners a-board char 3 3 1))
 
 (defn -main
   [& args]
