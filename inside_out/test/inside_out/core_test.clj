@@ -34,7 +34,7 @@
            (with-out-str (with-in-str "b\n1\n" (ask-player-where-to-play test-board)))))))
 
 (deftest computer-select-location-test
-  (testing "" (is (true? (boolean (some #(= "O" %1) (computer-select-location test-board)))))))
+  (testing "" (is (true? (boolean (some #(= "O" %1) (computer-select-location-easy test-board)))))))
 
 (deftest check-across-winner-test
   (testing "that a board with a horizontal winner is found"

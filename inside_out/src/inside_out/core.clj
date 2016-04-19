@@ -34,7 +34,7 @@
   (clear-screen)
   (print str-rep))
 
-(defn computer-select-location [a-board]
+(defn computer-select-location-easy [a-board]
   (let [position (rand-nth (filter number? a-board))]
     (update-board a-board position "O")))
 
@@ -42,7 +42,7 @@
   (System/exit 0))
 
 (def turn-function
-  (take 9 (cycle [ask-player-where-to-play computer-select-location])))
+  (take 9 (cycle [ask-player-where-to-play computer-select-location-easy])))
 
 (defn check-non-diagnol-winners [a-board char stop increment step]
   (loop [a-board a-board
