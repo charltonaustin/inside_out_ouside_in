@@ -59,6 +59,11 @@
     (is (nil? (check-diagnol-winner (assoc test-board 2 "X" 4 "X" 6 "X") "O")))
     (is (nil? (check-diagnol-winner (assoc test-board 2 "X" 4 "O" 6 "X") "X")))))
 
+(deftest check-for-winner-test
+  (testing "that we get the correct winner back"
+    (is (= "X" (check-for-winner (assoc test-board 2 "X" 4 "X" 6 "X"))))
+    (is (= "O" (check-for-winner (assoc test-board 2 "O" 4 "O" 6 "O"))))
+    (is (nil? (check-for-winner test-board)))))
 
 (deftest main-test
   (testing "Print out blank board"

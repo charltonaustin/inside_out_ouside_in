@@ -67,6 +67,12 @@
     char
     nil))
 
+(defn check-for-winner [a-board]
+  (some #(if (nil? %) false %)
+        (for [x ["X" "O"]
+              y [check-diagnol-winner check-vertical-winner check-horizontal-winner]]
+          (y a-board x))))
+
 (defn -main
   [& args]
   (loop [a-board (board)
@@ -78,8 +84,11 @@
       (do
         (print-to-screen (str-board a-board))
         (let [player-function (nth turn-function number-of-moves)
-              new-board (player-function a-board)]
-          (recur new-board
-            (inc number-of-moves)))))))
-
-
+              new-board (player-function a-board)
+              maybe-winner (check-for-winner a-board)]
+          (if maybe-winner
+            (do
+              (println (str maybe-winner " has won!"))
+              (recur new-board 9))
+            (recur new-board
+                   (inc number-of-moves))))))))
