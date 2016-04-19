@@ -61,6 +61,12 @@
 (defn check-vertical-winner [a-board char]
   (check-non-diagnol-winners a-board char 3 3 1))
 
+(defn check-diagnol-winner [a-board char]
+  (if (or (every? #(= char %1) [(get a-board 2) (get a-board 4) (get a-board 6)])
+          (every? #(= char %1) [(get a-board 0) (get a-board 4) (get a-board 8)]))
+    char
+    nil))
+
 (defn -main
   [& args]
   (loop [a-board (board)
