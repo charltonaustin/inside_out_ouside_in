@@ -17,17 +17,17 @@
       a-board)))
 
 (defn board []
-  (vec (map str (range 1 10))))
+  (vec (range 1 10)))
 
 (defn update-board [a-board position value]
   (assoc a-board (- position 1) value))
 
-(defn ask-player-where-to-play []
+(defn ask-player-where-to-play [a-board]
   (loop []
-    (println "Please pick a number between 1 and 9.")
+    (println "Please pick an available space [1-9].")
     (let [user-input (read-string (read-line))]
-      (if (contains? (set (range 1 10)) user-input)
-        user-input
+      (if (contains? (set (filter number? a-board)) user-input)
+        (update-board a-board user-input "X")
         (recur)))))
 
 (defn print-to-screen [str-rep]
@@ -35,21 +35,46 @@
   (print str-rep))
 
 (defn computer-select-location [a-board]
-  (let [position (rand-nth (range 1 10))]
+  (let [position (rand-nth (filter number? a-board))]
     (update-board a-board position "O")))
 
 (defn exit-now! []
   (System/exit 0))
 
+(def turn-function
+  (take 9 (cycle [ask-player-where-to-play computer-select-location])))
+
+(defn check-horizontal-winner [a-board char]
+  (loop [a-board a-board
+         row 0]
+    (if (> row 6)
+      nil
+      (if (every? #(= char %1) [(get a-board row) (get a-board (+ row 1)) (get a-board (+ row 2))])
+        char
+        (recur a-board (+ row 3))))))
+
+(defn check-vertical-winner [a-board char]
+  (loop [a-board a-board
+         column 0]
+    (if (> column 3)
+      nil
+      (if (every? #(= char %1) [(get a-board column) (get a-board (+ column 3)) (get a-board (+ column 6))])
+        char
+        (recur a-board (+ column 1))))))
+
 (defn -main
   [& args]
   (loop [a-board (board)
          number-of-moves 0]
-    (if (> number-of-moves 9)
-      (exit-now!)
+    (if (>= number-of-moves 9)
       (do
         (print-to-screen (str-board a-board))
-        (let [user-input (ask-player-where-to-play)]
-          (recur (computer-select-location (update-board a-board user-input "X")) (+ number-of-moves 2)))))))
+        (exit-now!))
+      (do
+        (print-to-screen (str-board a-board))
+        (let [player-function (nth turn-function number-of-moves)
+              new-board (player-function a-board)]
+          (recur new-board
+            (inc number-of-moves)))))))
 
 
